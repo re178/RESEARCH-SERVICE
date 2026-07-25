@@ -1,0 +1,42 @@
+function buildEvidence({
+  serviceName,
+  eventId,
+  symbol,
+  timestamp = Date.now(),
+  evidenceType,
+  summary,
+  confidence = 0.5,
+  uncertainty = 0.5,
+  historicalReliability = 0.7,
+  supportingData = {},
+  conflictingData = {},
+  applicableMarketRegime = 'unknown',
+  probabilityDistribution = null,
+  failureConditions = [],
+  expectedValidityDuration = 60,
+  processingTime = 0,
+  version = '1.0.0',
+}) {
+  return {
+    serviceName,
+    eventId,
+    symbol,
+    timestamp,
+    evidenceType,
+    summary,
+    confidence: Math.min(1, Math.max(0, confidence)),
+    uncertainty: Math.min(1, Math.max(0, uncertainty)),
+    historicalReliability: Math.min(1, Math.max(0, historicalReliability)),
+    currentWeight: 1.0,
+    supportingData,
+    conflictingData,
+    applicableMarketRegime,
+    probabilityDistribution,
+    failureConditions,
+    expectedValidityDuration,
+    processingTime,
+    version,
+  };
+}
+
+module.exports = { buildEvidence };
